@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600;800;900&display=swap');
+* {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	outline: none;
+	user-select: none;
+	font-family: 'Nunito Sans', sans-serif;
+	transition: background-color 0.25s, color 0.25s;
+}
+body {
+	background-color: #000000;
+	overflow: hidden;
+    font-weight: 700;
+}
+.background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-image: url("https://static.wixstatic.com/media/a387d4_420c28962ca2483d9e9739f307380b2c~mv2.jpg/v1/fill/w_980,h_710,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/a387d4_420c28962ca2483d9e9739f307380b2c~mv2.jpg");
+	background-size: cover;
+	background-position: center;
+	opacity: 0.75;
+	filter: blur(30px);
+}
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	color: rgba(255, 255, 255, 0.8);
+}
+.container .banner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: rgba(255, 255, 255, 1);
+	font-weight: 900;
+	letter-spacing: -1px;
+}
+.container .tab {
+	display: none;
+}
+.container .heading {
+	height: 60px;
+	font-size: 19px;
+	font-weight: 800;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: -5px;
+}
+.container .section {
+	width: 80vw;
+	max-width: 275px;
+}
+.container .section span {
+	font-size: 13px;
+	font-weight: 600;
+	color: rgba(255, 255, 255, 0.75);
+	margin-bottom: 2.5px;
+}
+.container .section.actions {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#login-tab #login-button, #send-tab button,  #send-tab a, #messages-tab a, #success-tab a, #customise-tab button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50px;
+	height: 50px;
+	border-radius: 5px;
+	background-color: rgba(255, 255, 255, 0.125);
+	color: rgba(255, 255, 255, 0.875);
+	text-decoration: none;
+	font-size: 20px;
+	cursor: pointer;
+}
+#login-tab #override-section {
+	display: none;
+}
+#login-tab #override-section #override-list {
+	margin: 2.5px 0px;
+}
+#login-tab #override-section #override-list button {
+	width: 100%;
+	padding: 7.5px 10px;
+	margin: 2.5px 5px;
+	text-align: left;
+	border-radius: 5px;
+	font-size: 11px;
+	background-color: rgba(255, 255, 255, 0.125);
+	color: rgba(255, 255, 255, 0.875);
+	cursor: pointer;
+}
+#login-tab #override-section .frame {
+	background-color: #FFFFFF;
+	padding: 5px;
+	border-radius: 5px;
+}
+#customise-tab .section .frame {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#customise-tab .section .profile {
+	width: 100px;
+	height: 100px;
+	position: relative;
+	margin-top: 15px;
+}
+#customise-tab .section .profile #profile-image {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	background-color: rgba(255, 255, 255, 0.1);
+	background-position: center;
+	background-size: cover;
+}
+#customise-tab .section .profile button {
+	font-size: 20px;
+	font-weight: 700;
+	width: 25%;
+	height: 25%;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	background-color: #EEEEEE;
+	color: #222222;
+}
+#customise-tab .section .info {
+	height: 60px;
+	text-align: center;
+	font-size: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#customise-tab .section .info .id {
+	font-size: 12.5px;
+	font-weight: 500;
+	color: rgba(255, 255, 255, 0.5)
+}
+#login-tab .description, #messages-tab .description, #success-tab .description {
+	width: 100%;
+	margin: 0px auto;
+	text-align: center;
+	color: rgba(255, 255, 255, 0.5);
+	font-size: 13px;
+	margin-bottom: 15px;
+}
+#messages-tab .message {
+	background-color: rgba(255, 255, 255, 0.05);
+	padding: 5px;
+	font-weight: 400;
+	border-radius: 5px;
+	font-size: 12.5px;
+	color: rgba(255, 255, 255, 0.75);
+	margin-bottom: 5px;
+}
+#messages-tab .message .content {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: calc(99% - (5px * 2));
+	padding: 2.5px;
+	padding-left: 5px;
+	padding-top: 5px;
+}
+#messages-tab .message .profile {
+	display: inline-flex;
+	justify-content: left;
+	align-items: center;
+	color: rgba(255, 255, 255, 0.5);
+	font-size: 10px;
+	padding: 5px;
+	background-color: rgba(255, 255, 255, 0.05);
+	border-radius: 5px;
+	min-width: 50%
+}
+#messages-tab .message .profile .tribe {
+	width: 4px;
+	height: 32px;
+	margin-right: 10px;
+	border-radius: 10px;
+}
+#messages-tab .message .profile .name {
+	margin-right: 5px;
+	color: rgba(255, 255, 255, 0.75);
+}
+#send-tab .autocomplete {
+	width: 100%;
+	position: relative;
+}
+#send-tab .autocomplete .list {
+	display: none;
+	position: absolute;
+	left: 0;
+	right: 0;
+	max-height: 30vh;
+	overflow: auto;
+	color: rgba(0, 0, 0, 0.25);
+	background-color: #EEEEEE;
+	padding: 5px 7.5px;
+}
+#send-tab .autocomplete .list button {
+	padding: 5px 5px;
+	justify-content: left;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	font-size: 13px;
+	text-align: left;
+	background-color: rgba(0, 0, 0, 0);
+	font-weight: 700;
+	text-shadow: 0px 0px 1.25px rgba(0, 0, 0, 0.125)
+}
+#messages-tab .list {
+	height: 30vh;
+	overflow: auto;
+}
+input[type="text"], textarea {
+	width: calc(100% - (12.5px * 2));
+	padding: 10px 12.5px;
+	border-radius: 5px;
+	background-color: rgba(255, 255, 255, 0.0625);
+	color: rgba(255, 255, 255, 0.625);
+	font-weight: 700;
+	font-size: 14px;
+	box-shadow: 0px 0px 2.5px rgba(0, 0, 0, 0.25);
+	resize: none;
+}

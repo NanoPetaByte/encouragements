@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>
+            * {
+                border: 0;
+                padding: 0;
+                margin: 0;
+                outline: none;
+                user-select: none;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+            }
+            .container {
+                max-width: 800px;
+                margin: 5% auto;
+                background-color: #000000;
+            }
+            .container .heading {
+                padding-top: 15px;
+                text-align: center;
+                color: #FFFFFF;
+                font-size: 20px;
+                font-weight: 700;
+            }
+            .section .logo {
+                text-align: center;
+                color: #FFFFFF;
+                font-size: 30px;
+                font-weight: 900;
+                padding: 15px;
+            }
+            .section .banner {
+                background-position: center 27.5%;
+                background-size: cover;
+                height: 450px;
+                background-repeat: no-repeat;
+            }
+            .messages {
+                display: flex;
+                flex-wrap: wrap;
+                margin: 0px 10px;
+                padding: 5px 0px;
+            }
+            .messages .message {
+                display: inline-block;
+                margin: 2.5px;
+            }
+            .message .profile {
+                display: inline-flex;
+                justify-content: left;
+                align-items: center;
+                color: rgba(255, 255, 255, 0.5);
+                padding: 5px 0px;
+                font-size: 9px;
+                font-weight: 600;
+                border-radius: 5px;
+            }
+            .message .profile .tribe {
+                height: calc(100px/2.25);
+                width: 5px;
+                border-radius: 5px;
+                margin-right: 12.5px;
+            }
+            .message .profile .info {
+                margin-right: 5px;
+            }
+            .message .profile .info .name {
+                color: rgba(255, 255, 255, 0.75);
+                font-size: 13px;
+            }
+            .message .content {
+                position: relative;
+                background-color: #EEEEEE;
+                margin-top: 2.5px;
+                padding: 7.5px 10px;
+                font-size: 13px;
+                border-radius: 5px;
+                color: rgba(0, 0, 0, 0.75);
+                max-width: calc(800px - (10px * 2));
+                font-weight: 700;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="section">
+                <div class="logo">YI</div>
+                <div class="banner" style="background-image: url('{ banner url }')"></div>
+            </div>
+            <div class="heading">Your Messages</div>
+            <div class="messages">
+                { messages }
+            </div>
+        </div>
+    </body>
+</html>
