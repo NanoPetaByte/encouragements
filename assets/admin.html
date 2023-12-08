@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;800;900&display=swap');
+            * {
+                border: 0;
+                padding: 0;
+                margin: 0;
+                outline: none;
+                user-select: none;
+                font-family: 'Nunito Sans', sans-serif;
+            }
+            body {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 100%;
+            }
+            .statistics {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 10px 0px;
+                margin-top: 10px;
+            }
+            .statistics .section {
+                margin: 0px 10px;
+            }
+            .statistics .section .heading, .container .section .heading {
+                font-size: 15px;
+                font-weight: 600;
+                color: rgba(0, 0, 0, 0.5)
+            }
+            .statistics .section .value, .container .section .value {
+                font-size: 30px;
+                font-weight: 800;
+                color: rgba(0, 0, 0, 0.75);
+                margin-top: -2.5px;
+            }
+            .statistics #reload-button {
+                font-size: 20px;
+                width: 30px;
+                height: 30px;
+                border-radius: 5px;
+                background-color: rgba(0, 0, 0, 0.0625);
+                color: rgba(0, 0, 0, 0.25);
+                margin-left: 10px;
+                cursor: pointer;
+                transition: opacity 2s;
+            }
+            .container .section {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+            .container .status {
+                margin-bottom: 10px;
+                font-size: 17.5px;
+                font-weight: 800;
+                color: rgba(0, 0, 0, 0.75);
+                padding: 10px 0px;
+            }
+            .container .status i {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-right: 15px;
+                border-radius: 50%;
+            }
+            .container .status .fa-check {
+                background-color: #2ECC71;
+                color: #FFFFFF;
+            }
+            .hidden {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 20px;
+            }
+            .hidden .progress {
+                width: 50%;
+                background-color: rgba(0, 0, 0, 0.0675);
+                margin: 0px calc((100% - 50%)/2);
+                border-radius: 5px;
+                overflow: hidden;
+				max-width: 250px;
+            }
+            .hidden .progress .juice {
+                background-color: #3498DB;
+                height: 100%;
+                width: 0%;
+                cursor: pointer;
+            }
+            .hidden .progress .value {
+                text-align: center;
+                color: #FFFFFF;
+                font-size: 12.5px;
+                padding: 2.5px 0px;
+            }
+            .hidden #hidden-button {
+                display: none;
+                background-color: rgba(0, 0, 0, 0.0675);
+                box-shadow: 0px 0px 2.5px rgba(0, 0, 0, 0.5);
+                padding: 10px 20px;
+                color: rgba(0, 0, 0, 0.5);
+                border-radius: 7.5px;
+                font-weight: 800;
+            }
+        </style>
+    </head>
+    <body onload="update()">
+        <div class="container">
+            <div class="section status">
+                <i class="fa-solid fa-check"></i> Server is Online!
+            </div>
+        </div>
+        <div class="statistics">
+            <div class="section">
+                <div class="heading">Total Messages</div>
+                <div class="value" id="total-messages"></div>
+            </div>
+            <div class="section">
+                <div class="heading">Storage Used (KB)</div>
+                <div class="value" id="total-storage"></div>
+            </div>
+            <button id="reload-button">
+                <i class="fa-solid fa-arrows-rotate"></i>
+            </button>
+        </div>
+        <div class="hidden">
+            <div class="progress" id="progress-section">
+                <div class="juice" id="progress">
+                    <div class="value" id="progress-value"></div>
+                </div>
+            </div>
+            <button id="hidden-button">Release Messages</button>
+        </div>
+    </body>
+    <script>
+        async function update() {
+            time = (new Date()).getTime()
+            statistics = [await (await fetch("https://ewkty2ftcc1.nanopetabyte.repl.co/admin/statistics", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })).json(), {
+                messages: document.getElementById("total-messages"),
+                storage: document.getElementById("total-storage"),
+                reload: document.getElementById("reload-button"),
+                response: document.getElementById("response-time"),
+                progress: [
+                    document.getElementById("progress-section"),
+                    document.getElementById("progress"),
+                    document.getElementById("progress-value")
+                ],
+                hidden: document.getElementById("hidden-button")
+            }]
+            statistics[1].messages.textContent = statistics[0].messages.total
+            statistics[1].storage.textContent = (statistics[0].accounts.size + statistics[0].messages.size[0]).toFixed(2)
+            statistics[1].reload.onclick = function() { this.style.opacity = "0"; update() }
+            statistics[1].response.textContent = ((new Date()).getTime() - time)
+            statistics[1].reload.style.opacity = "1"
+            if (statistics[0].released < 1) {
+                if (statistics[0].messages.total > parseInt(statistics[0].accounts.total/8)-1) {
+                    statistics[1].hidden.style.display = "block"
+                    statistics[1].progress[0].style.display = "none"
+                    statistics[1].hidden.onclick = async function() {
+                        statistics[1].hidden.style.display = "none"
+                        request = await (await fetch("https://ewkty2ftcc1.nanopetabyte.repl.co/admin/release", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })).json()
+                        console.log(request)
+                    }
+                }
+                statistics[1].progress[1].style.width = ((statistics[0].messages.total/parseInt(statistics[0].accounts.total/8)) * 100) + "%"
+            } else {
+                statistics[1].hidden.style.display = "none"
+                statistics[1].progress[0].style.display = "block"
+                statistics[1].progress[2].textContent = `${statistics[0].released} of ${statistics[0].messages.total} released.`
+                statistics[1].progress[1].style.width = ((statistics[0].released/statistics[0].messages.total) * 100) + "%"
+            }
+        }
+        setInterval(update, 1000 * 15)
+    </script>
+</html>
